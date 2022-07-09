@@ -1,4 +1,4 @@
-import { db } from "../database/mongo.js"
+import { db, objectId } from "../database/mongo.js"
 
 export async function allMangas(req, res) {
 
@@ -17,6 +17,18 @@ export async function genreMangas(req, res) {
 	try {
 		const mangas = await db.collection("mangas").find(mangaGenre).toArray();
 		res.send(mangas).status(200);
+	}
+	catch (error) {
+		res.status(500).send(error);
+	}
+}
+
+export async function chosenManga(req, res) {
+	const mangaId = req.params.mangaId;
+	
+	try {
+		const manga = await db.collection("mangas").findOne({_id: new objectId (mangaId)});
+		res.send(manga).status(200);
 	}
 	catch (error) {
 		res.status(500).send(error);
