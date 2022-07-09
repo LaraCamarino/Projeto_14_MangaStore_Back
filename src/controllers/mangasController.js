@@ -15,7 +15,7 @@ export async function genreMangas(req, res) {
 	const genre = req.body;
 
 	try {
-		const mangas = await db.collection("mangas").find(genre);
+		const mangas = await db.collection("mangas").find(genre).toArray();
 		res.send(mangas).status(200);
 	}
 	catch (error) {
