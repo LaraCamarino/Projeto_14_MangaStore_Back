@@ -12,10 +12,10 @@ export async function allMangas(req, res) {
 }
 
 export async function genreMangas(req, res) {
-	const genre = req.body;
 
+	const mangaGenre = {genre: req.params.mangaGenre};
 	try {
-		const mangas = await db.collection("mangas").find(genre).toArray();
+		const mangas = await db.collection("mangas").find(mangaGenre).toArray();
 		res.send(mangas).status(200);
 	}
 	catch (error) {

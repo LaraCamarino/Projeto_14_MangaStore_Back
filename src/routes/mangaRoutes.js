@@ -5,7 +5,7 @@ import validateMangaPost from "../middlewares/validateMangaPost.js";
 const router = Router();
 
 router.get("/allMangas", allMangas);
-router.get("/genreMangas", genreMangas);
+router.get("/genreMangas/:mangaGenre", genreMangas);
 router.post("/addMangas", validateMangaPost, addMangas);
 router.delete("/deleteManga", deleteManga);
 
