@@ -35,6 +35,28 @@ export async function chosenManga(req, res) {
 	}
 }
 
+export async function searchManga(req, res) {
+	let mangaName = req.params.mangaName;
+	
+	try {
+		
+		
+		const Allmangas = await db.collection("mangas").find().toArray();
+		
+		
+		mangaName = mangaName.toLowerCase();
+		let searchedMangas = Allmangas.filter(manga => manga.title
+			  .toLowerCase()
+			  .startsWith(mangaName.slice(0, Math.max(manga.title.length - 1, 1)))
+			);
+
+		res.send(searchedMangas).status(200);
+	}
+	catch (error) {
+		res.status(500).send(error);
+	}
+}
+
 export async function addMangas(req, res) {
 	
     const manga = req.body;
