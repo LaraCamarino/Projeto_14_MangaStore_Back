@@ -1,7 +1,7 @@
 import joi from "joi";
 
 export default async function validateCheckOut(req, res, next) {
-    const purchase = req.body;
+    const purchase = req.body.purchaseDetails;
     const nameRegex = /^[a-zA-Z]{2,25}$/;
     const cardNumberRegex = /^.{16}$/;
 
@@ -11,7 +11,7 @@ export default async function validateCheckOut(req, res, next) {
         email: joi.string().email().required(),
         cardNumber: joi.number().pattern(cardNumberRegex).required(),
         expirationDate: joi.string().required(),
-        cvc: joi.number().required
+        cvc: joi.number().required()
     });
     const validation = purchaseSchema.validate(purchase, { abortEarly: false });
     if (validation.error) {
