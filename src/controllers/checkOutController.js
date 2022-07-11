@@ -7,9 +7,9 @@ export async function checkOut(req, res) {
     try {
 		await db.collection("purchases").insertOne({
 			userId: verifyValidToken.userId,
-			purchase: purchase
+			purchase
 		});
-		res.status(201).send("Transação criada com sucesso.");
+		res.status(201).send("Success.");
 	}
 	catch (error) {
 		res.status(500).send(error);
