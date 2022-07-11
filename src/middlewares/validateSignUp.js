@@ -2,7 +2,7 @@ import joi from "joi";
 
 export default async function validateSignUp(req, res, next) {
     const user = req.body;
-    const nameRegex = /^[a-zA-Z]{2,20}$/;
+    const nameRegex = /^[a-zA-Z]{2,25}$/;
     const passwordRegex = /^.{8,}$/;
 
     const userSchema = joi.object({

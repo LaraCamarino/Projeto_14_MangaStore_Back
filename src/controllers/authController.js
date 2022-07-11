@@ -10,12 +10,14 @@ export async function signUp(req, res) {
 	try {
 		const verifyIfEmailUsed = await db.collection("users").findOne({ email: user.email });
 		if (verifyIfEmailUsed) {
-			res.status(409).send("Esse e-mail já está em uso.");
+			res.status(409).send("This e-mail is already in use.");
 			return;
 		}
 
+		delete user.confirmPassword;
+
 		await db.collection("users").insertOne({ ...user, password: encryptedPassword });
-		res.status(201).send("Usuário cadastrado com sucesso.");
+		res.status(201).send("User registered successfully.");
 	}
 	catch (error) {
 		res.status(500).send(error);
@@ -42,7 +44,7 @@ export async function signIn(req, res) {
 			return;
 		}
 		else {
-			res.status(401).send("E-mail ou senha incorretos.");
+			res.status(401).send("Incorrect e-mail or password.");
 			return;
 		}
 	}

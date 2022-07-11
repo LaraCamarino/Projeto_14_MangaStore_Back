@@ -6,7 +6,7 @@ export default async function validateToken(req, res, next) {
 
     const verifyValidToken = await db.collection("sessions").findOne({ token });
     if (!verifyValidToken) {
-        res.status(401).send("Token inválido.");
+        res.status(401).send("Invalid token.");
         return;
     }
 
